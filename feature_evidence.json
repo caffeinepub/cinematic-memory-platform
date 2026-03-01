@@ -1,0 +1,238 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-a-hardcoded-authentication-system-for-exactly-6-members-stored-in-the-motoko-backend-each-user-has-id-name-email-hashed-password-and-role-admin-or-member-on-successful-login-the-frontend-displays-an-animated-typewriter-text-welcome-back-memory-keeper-using-a-cinematic-fade-typewriter-animation",
+      "featureTitle": "Implement a hardcoded authentication system for exactly 6 members stored in the Motoko backend. Each user has: id, name, email, hashed password, and role (admin or member). On successful login, the frontend displays an animated typewriter text: 'Welcome back, Memory Keeper.' using a cinematic fade + typewriter animation.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/LoginPage.tsx",
+        "frontend/src/components/WelcomeScreen.tsx",
+        "frontend/src/hooks/useTypewriter.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-cinematic-landing-intro-page-that-fades-in-from-a-fully-black-screen-then-displays-a-typewriter-animated-introductory-text-some-moments-were-never-meant-to-be-forgotten-in-gold-ffd700-enable-a-custom-golden-glowing-cursor-throughout-the-entire-site-cursor-glow-rgba-255-215-0-0-6",
+      "featureTitle": "Create a cinematic landing/intro page that fades in from a fully black screen, then displays a typewriter-animated introductory text: 'Some moments were never meant to be forgotten…' in gold (#FFD700). Enable a custom golden glowing cursor throughout the entire site (cursor glow: rgba(255,215,0,0.6)).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/IntroPage.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-memory-wheel-as-the-main-feature-a-circular-wheel-ui-with-memory-photos-placed-along-its-border-the-wheel-rotates-on-scroll-using-animation-simulated-gsap-style-via-css-transforms-react-state-when-a-photo-aligns-at-the-center-position-the-page-background-transitions-dynamically-to-match-that-memory-s-scene-type-and-the-photo-becomes-clickable-to-unlock-the-memory",
+      "featureTitle": "Build the Memory Wheel as the main feature: a circular wheel UI with memory photos placed along its border. The wheel rotates on scroll using animation (simulated GSAP-style via CSS transforms + React state). When a photo aligns at the center position: the page background transitions dynamically to match that memory's scene type, and the photo becomes clickable to unlock the memory.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/DynamicBackground.tsx",
+        "frontend/src/components/MemoryWheel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-memory-unlock-animation-sequence-triggered-on-clicking-a-memory-photo-1-screen-fades-to-black-2-heartbeat-pulse-transition-effect-3-photo-zooms-in-with-a-three-js-3d-depth-parallax-effect-rendered-in-a-canvas-4-voice-narration-audio-plays-from-stored-url-5-subtitle-text-appears-with-a-cinematic-slide-up-animation-6-handwritten-style-overlay-text-appears-on-the-image-using-a-cursive-font-with-a-drawing-in-animation",
+      "featureTitle": "Implement the Memory Unlock Animation sequence triggered on clicking a memory photo: (1) screen fades to black, (2) heartbeat pulse transition effect, (3) photo zooms in with a Three.js 3D depth/parallax effect rendered in a canvas, (4) voice narration audio plays (from stored URL), (5) subtitle text appears with a cinematic slide-up animation, (6) handwritten-style overlay text appears on the image using a cursive font with a drawing-in animation.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/MemoryUnlockAnimation.tsx",
+        "frontend/src/components/ThreePhotoCanvas.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-dynamic-background-scenes-based-on-memory-location-type-field-memories-tagged-as-beach-or-trip-photos-display-a-beach-blur-gradient-background-memories-tagged-as-college-display-a-campus-themed-blur-background-memories-tagged-as-night-display-a-dark-cinematic-tone-background-these-backgrounds-animate-on-transition",
+      "featureTitle": "Apply dynamic background scenes based on memory location/type field: memories tagged as 'beach' or trip photos display a beach blur gradient background; memories tagged as 'college' display a campus-themed blur background; memories tagged as 'night' display a dark cinematic tone background. These backgrounds animate on transition.",
+      "files": [
+        "frontend/src/components/DynamicBackground.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-mode-toggle-allowing-users-to-switch-between-wheel-mode-and-timeline-mode-in-timeline-mode-memories-are-displayed-in-a-vertical-scrollable-timeline-sorted-by-year-with-scroll-triggered-animations-revealing-each-memory-card-year-by-year-using-framer-motion-intersection-observer",
+      "featureTitle": "Implement a mode toggle allowing users to switch between Wheel Mode and Timeline Mode. In Timeline Mode, memories are displayed in a vertical scrollable timeline sorted by year, with scroll-triggered animations revealing each memory card year by year using Framer Motion intersection observer.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/MemoryCard.tsx",
+        "frontend/src/components/ModeToggle.tsx",
+        "frontend/src/components/TimelineMode.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-travel-map-mode-showing-a-stylized-svg-map-of-india-with-three-clickable-location-markers-vizag-goa-and-bangalore-clicking-a-location-marker-filters-and-displays-memory-cards-related-to-that-location-in-a-side-panel-or-modal-with-cinematic-entrance-animation",
+      "featureTitle": "Build a Travel Map Mode showing a stylized SVG map of India with three clickable location markers: Vizag, Goa, and Bangalore. Clicking a location marker filters and displays memory cards related to that location in a side panel or modal with cinematic entrance animation.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/LocationMarker.tsx",
+        "frontend/src/components/TravelMapMode.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-secret-memory-unlock-logic-track-how-many-memories-have-been-viewed-and-how-many-times-the-wheel-has-been-fully-rotated-5-rotations-when-all-regular-memories-are-viewed-or-the-wheel-is-rotated-5-times-unlock-and-reveal-a-hidden-special-memory-with-a-distinct-secret-revealed-cinematic-animation-e-g-golden-particle-burst-special-typewriter-message",
+      "featureTitle": "Implement Secret Memory Unlock logic: track how many memories have been viewed and how many times the wheel has been fully rotated (5 rotations). When all regular memories are viewed OR the wheel is rotated 5 times, unlock and reveal a hidden special memory with a distinct 'secret revealed' cinematic animation (e.g., golden particle burst + special typewriter message).",
+      "files": [
+        "frontend/src/components/MemoryWheel.tsx",
+        "frontend/src/components/SecretRevealAnimation.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-an-admin-panel-accessible-only-to-users-with-the-admin-role-the-panel-allows-uploading-a-photo-stored-as-url-uploading-a-voice-note-stored-as-url-adding-story-text-adding-subtitle-text-setting-year-setting-location-marking-a-memory-as-special-all-fields-map-to-the-memories-data-structure-in-the-motoko-backend",
+      "featureTitle": "Build an Admin Panel accessible only to users with the 'admin' role. The panel allows: uploading a photo (stored as URL), uploading a voice note (stored as URL), adding story text, adding subtitle text, setting year, setting location, marking a memory as special. All fields map to the Memories data structure in the Motoko backend.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AdminMemoryList.tsx",
+        "frontend/src/components/AdminPanel.tsx",
+        "frontend/src/components/MemoryForm.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-cinematic-ending-page-that-triggers-after-all-memories-have-been-viewed-it-displays-a-full-black-screen-ambient-piano-audio-plays-from-a-stored-asset-url-the-following-lines-appear-one-by-one-with-cinematic-typewriter-animation-from-strangers-to-stories-from-days-to-memories-our-journey-continues-then-a-group-photo-asset-fades-in-slowly-from-black",
+      "featureTitle": "Create a cinematic Ending Page that triggers after all memories have been viewed. It displays: a full black screen, ambient piano audio plays (from a stored asset URL), the following lines appear one by one with cinematic typewriter animation: 'From strangers… to stories.' / 'From days… to memories.' / 'Our journey continues…', then a group photo asset fades in slowly from black.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/EndingPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-global-cinematic-ui-polish-matte-black-0a0a0a-background-throughout-all-accent-text-borders-glows-use-gold-ffd700-with-glow-rgba-255-215-0-0-6-include-parallax-scroll-effect-on-memory-cards-particle-effects-golden-floating-particles-exclusive-to-special-memories-ripple-animation-on-all-click-interactions-page-fade-transitions-between-all-routes-and-consistent-golden-border-shadow-on-all-cards-and-interactive-elements-ensure-full-responsive-layout-for-mobile-and-desktop",
+      "featureTitle": "Apply global cinematic UI polish: matte black (#0A0A0A) background throughout, all accent text/borders/glows use gold (#FFD700) with glow rgba(255,215,0,0.6). Include: parallax scroll effect on memory cards, particle effects (golden floating particles) exclusive to special memories, ripple animation on all click interactions, page fade transitions between all routes, and consistent golden border/shadow on all cards and interactive elements. Ensure full responsive layout for mobile and desktop.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/PageTransition.tsx",
+        "frontend/src/components/ParticleEffect.tsx",
+        "frontend/src/components/RippleEffect.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

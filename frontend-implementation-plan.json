@@ -1,0 +1,359 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Cinematic Friendship & Travel Memory Experience Platform - Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement authentication UI with animated typewriter welcome message for 6 hardcoded members",
+      "acceptanceCriteria": [
+        "Only 6 pre-seeded user accounts can log in",
+        "Users have a role field: 'admin' or 'member'",
+        "After successful login, a typewriter animation displays 'Welcome back, Memory Keeper.' on screen",
+        "Incorrect credentials show an error state",
+        "Session persists across page refreshes using local storage or React context"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LoginPage.tsx",
+          "operation": "create",
+          "description": "Create login page component with email/password form. Use the authorization component to authenticate users. On successful login, redirect to welcome screen with typewriter animation. Show error messages for invalid credentials. Include form validation and loading states."
+        },
+        {
+          "path": "frontend/src/components/WelcomeScreen.tsx",
+          "operation": "create",
+          "description": "Create welcome screen component that displays 'Welcome back, Memory Keeper.' with cinematic fade-in and typewriter animation using Framer Motion. Auto-transition to Memory Wheel after animation completes (3-4 seconds)."
+        },
+        {
+          "path": "frontend/src/hooks/useTypewriter.ts",
+          "operation": "create",
+          "description": "Create custom hook for typewriter text animation. Accepts text string and delay parameters. Returns current displayed text and completion status. Uses setTimeout/setInterval for character-by-character reveal."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire LoginPage and WelcomeScreen into routing. Add protected route wrapper that checks authentication status using the authorization component. Redirect unauthenticated users to LoginPage. Show WelcomeScreen after login, then redirect to main Memory Wheel view."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Create cinematic landing page with black fade-in, typewriter intro text, and golden glowing cursor",
+      "acceptanceCriteria": [
+        "Page opens with a full black screen that fades in",
+        "Typewriter effect animates the intro text character by character",
+        "A custom gold-glowing cursor replaces the default cursor site-wide",
+        "After intro animation completes, user is transitioned to the main Memory Wheel view",
+        "Animation uses Framer Motion for page fade and a typewriter utility for text"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/IntroPage.tsx",
+          "operation": "create",
+          "description": "Create intro page component that renders full-screen black background with hero image frontend/public/assets/generated/hero-bg.dim_1920x1080.png. Fade in from black using Framer Motion. Display typewriter-animated text 'Some moments were never meant to be forgotten…' in gold (#FFD700). Auto-redirect to Memory Wheel after animation completes (5-6 seconds)."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add global CSS for custom golden glowing cursor. Define cursor style with box-shadow rgba(255,215,0,0.6) glow effect. Apply to body element to enable site-wide. Include cursor image/shape if needed, or use pure CSS circle with gold glow."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire IntroPage as the initial route for first-time visitors or unauthenticated users. After intro completes, transition to LoginPage. Store intro-viewed flag in sessionStorage to prevent repeated playback during the same session."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build Memory Wheel UI with scroll-based rotation and dynamic backgrounds",
+      "acceptanceCriteria": [
+        "Memory photos are arranged in a circular layout",
+        "Scrolling rotates the wheel, cycling through photos",
+        "The centered photo is visually highlighted (scale/glow)",
+        "Background gradient changes based on the centered memory's type",
+        "Clicking the centered photo triggers the Memory Unlock Animation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/MemoryWheel.tsx",
+          "operation": "create",
+          "description": "Create Memory Wheel component that arranges memory photos in a circular layout using CSS transforms and absolute positioning. Use the wheel frame image frontend/public/assets/generated/wheel-frame.dim_800x800.png as an overlay. Implement scroll listener that updates rotation state (degrees) and cycles through memories. Highlight centered photo with scale transform and gold glow. Handle click on centered photo to trigger unlock sequence."
+        },
+        {
+          "path": "frontend/src/hooks/useMemoryWheel.ts",
+          "operation": "create",
+          "description": "Create custom hook managing Memory Wheel state: current rotation angle, centered memory index, rotation count tracking (for secret unlock). Expose methods to rotate, select memory, increment rotation counter. Persist state in localStorage for session continuity."
+        },
+        {
+          "path": "frontend/src/hooks/useMemories.ts",
+          "operation": "create",
+          "description": "Create custom hook to fetch all memories from backend using getAllMemories(). Use React Query for caching and loading states. Return memories array, loading status, and error state. Filter secret memories based on unlock status."
+        },
+        {
+          "path": "frontend/src/components/DynamicBackground.tsx",
+          "operation": "create",
+          "description": "Create component that renders dynamic background gradients based on memory scene_type prop (beach, college, night). Use Framer Motion AnimatePresence for smooth transitions. Map scene types to gradient definitions: beach=warm ocean tones, college=muted campus colors, night=deep indigo/black. Apply backdrop blur filter for cinematic effect."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire MemoryWheel component into main authenticated route. Wrap with DynamicBackground component that responds to current centered memory's scene_type. Add navigation to allow switching between Wheel Mode and Timeline Mode."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement Memory Unlock Animation sequence with Three.js 3D zoom, voice narration, and handwritten overlay",
+      "acceptanceCriteria": [
+        "Clicking a memory triggers a full black screen fade",
+        "A heartbeat pulse animation plays before the photo appears",
+        "The photo is rendered in a Three.js canvas with 3D zoom/depth effect",
+        "Voice narration audio auto-plays from the memory's voice_note_url",
+        "Subtitle text animates in from below with cinematic timing",
+        "Handwritten overlay text appears on the photo with a draw-in cursive animation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/MemoryUnlockAnimation.tsx",
+          "operation": "create",
+          "description": "Create full-screen modal component orchestrating the unlock animation sequence: (1) fade to black using Framer Motion, (2) heartbeat pulse effect (scale pulsing animation), (3) render Three.js canvas with 3D photo zoom/parallax, (4) auto-play audio element from memory.voiceNoteUrl, (5) animate subtitle from bottom with slide-up, (6) draw-in handwritten overlay using SVG path animation or CSS animation on cursive text. Accept memory object as prop. Include close/exit handler."
+        },
+        {
+          "path": "frontend/src/components/ThreePhotoCanvas.tsx",
+          "operation": "create",
+          "description": "Create Three.js canvas component that renders a memory photo with 3D depth/parallax effect. Use Three.js PlaneGeometry with texture from photo URL. Animate camera zoom and slight rotation for cinematic effect. Handle canvas resize and cleanup on unmount."
+        },
+        {
+          "path": "frontend/src/hooks/useMemoryViewed.ts",
+          "operation": "create",
+          "description": "Create custom hook that calls backend markMemoryViewed() function when a memory is unlocked. Track viewed memory IDs in local state and sync with backend. Use React Query mutation for backend call. Update viewed count state for secret unlock logic."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add state management for currently unlocking memory. Pass unlock handler to MemoryWheel that opens MemoryUnlockAnimation modal. Ensure modal overlays entire app with high z-index. After unlock animation completes, mark memory as viewed via useMemoryViewed hook."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Apply dynamic background scenes based on memory location/type with animated transitions",
+      "acceptanceCriteria": [
+        "Each memory has a scene_type field used to select background",
+        "Beach type shows a warm ocean gradient with blur",
+        "College type shows a muted campus-toned background",
+        "Night type shows a deep dark cinematic black/indigo tone",
+        "Background transitions smoothly using Framer Motion when memory changes"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/DynamicBackground.tsx",
+          "operation": "modify",
+          "description": "Enhance DynamicBackground component with detailed gradient definitions for each scene type. Beach: linear-gradient with warm yellows/blues/turquoise. College: muted greens/grays. Night: deep black to indigo gradient. Apply CSS backdrop-filter blur(40px) for cinematic depth. Use Framer Motion variants for smooth color transitions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement mode toggle between Wheel Mode and Timeline Mode with scroll-triggered animations",
+      "acceptanceCriteria": [
+        "A toggle button switches between Wheel Mode and Timeline Mode",
+        "Timeline Mode shows memories grouped and sorted by year",
+        "Each year section and memory card animates in on scroll",
+        "Transition between modes uses a smooth page/component transition",
+        "Both modes are accessible on mobile and desktop"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ModeToggle.tsx",
+          "operation": "create",
+          "description": "Create mode toggle button component that switches between Wheel and Timeline modes. Use state management (React context or prop drilling) to control active mode. Style as cinematic gold-bordered toggle with smooth transition animation. Position as fixed overlay in top-right corner."
+        },
+        {
+          "path": "frontend/src/components/TimelineMode.tsx",
+          "operation": "create",
+          "description": "Create Timeline Mode component displaying memories in vertical scrollable layout grouped by year. Sort memories by year in descending order. Use Framer Motion's useInView hook to trigger scroll-reveal animations for each year section and memory card. Apply staggered entrance animations. Each memory card should be clickable to trigger unlock animation."
+        },
+        {
+          "path": "frontend/src/components/MemoryCard.tsx",
+          "operation": "create",
+          "description": "Create reusable Memory Card component showing photo thumbnail, year, location, and title. Apply golden border with box-shadow glow. Use Framer Motion for hover scale effect and parallax. Accept onClick handler to trigger memory unlock. Optionally show 'Special' badge for special memories."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire ModeToggle and TimelineMode components into main view. Add conditional rendering to switch between MemoryWheel and TimelineMode based on active mode state. Use Framer Motion AnimatePresence for smooth mode transition animations. Ensure both modes share the same memory data and unlock handlers."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build Travel Map Mode with clickable India location markers filtering memories",
+      "acceptanceCriteria": [
+        "A stylized SVG India map is rendered with gold marker pins at Vizag, Goa, and Bangalore",
+        "Clicking a location pin filters memories by that location",
+        "Filtered memories appear in an animated panel/modal",
+        "Map markers glow gold on hover",
+        "Map view is accessible via main navigation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TravelMapMode.tsx",
+          "operation": "create",
+          "description": "Create Travel Map Mode component rendering the India map image frontend/public/assets/generated/india-map.dim_600x800.png. Overlay interactive SVG marker pins at Vizag, Goa, and Bangalore coordinates. Add click handlers to filter memories by location. Show filtered memories in animated side panel or modal using Framer Motion slide-in. Apply gold glow effect on marker hover. Include close/reset handler."
+        },
+        {
+          "path": "frontend/src/components/LocationMarker.tsx",
+          "operation": "create",
+          "description": "Create SVG location marker component (gold pin/dot). Accept position props (x, y coordinates), location name, and onClick handler. Apply hover glow animation using CSS or Framer Motion. Show location label on hover."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire TravelMapMode component into navigation. Add route or mode state for Map view accessible from main navigation. Update ModeToggle or add separate navigation button for Map Mode. Ensure smooth transitions between Wheel, Timeline, and Map modes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Implement Secret Memory Unlock logic with tracking and cinematic reveal animation",
+      "acceptanceCriteria": [
+        "Backend tracks a 'secret' flag on one memory record",
+        "Frontend tracks viewed memory IDs in state/local storage",
+        "Frontend counts wheel rotation cycles",
+        "Secret memory is unlocked when condition is met and stored in user session",
+        "A cinematic reveal animation (particle burst + typewriter) triggers on unlock"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useSecretUnlock.ts",
+          "operation": "create",
+          "description": "Create custom hook managing secret unlock logic. Track viewed memory count via backend getViewedMemoriesCount() and wheel rotation count from useMemoryWheel hook. Check unlock condition: all non-secret memories viewed OR 5 full wheel rotations completed. Store unlock status in localStorage. Return isUnlocked boolean and unlock trigger function."
+        },
+        {
+          "path": "frontend/src/components/SecretRevealAnimation.tsx",
+          "operation": "create",
+          "description": "Create full-screen secret reveal animation component. Use particle sprite image frontend/public/assets/generated/particle-sprite.dim_256x256.png for golden particle burst effect (CSS animation or canvas-based). Display typewriter-animated message: 'A secret memory has been revealed...' in gold. Auto-close after animation (4-5 seconds) and navigate to secret memory unlock view. Use Framer Motion for orchestration."
+        },
+        {
+          "path": "frontend/src/components/MemoryWheel.tsx",
+          "operation": "modify",
+          "description": "Integrate useSecretUnlock hook. When unlock condition is met, trigger SecretRevealAnimation. After reveal, add secret memory to visible memories in the wheel. Ensure secret memory has distinct visual styling (extra glow, special badge)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Build Admin Panel UI for creating/editing memories with role-based access",
+      "acceptanceCriteria": [
+        "Admin panel route is protected and only accessible to admin-role users",
+        "Form includes fields for all memory attributes",
+        "Submitting the form calls a backend create/update function",
+        "Photo and voice note URLs are stored as text fields (no binary upload required)",
+        "Admin can mark a memory as 'special' via a toggle",
+        "Existing memories are listed with edit/delete options"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AdminPanel.tsx",
+          "operation": "create",
+          "description": "Create Admin Panel component with protected route using the authorization component's isCallerAdmin check. Show access denied screen for non-admin users. Include navigation to memory list and create/edit forms. Use cinematic gold/black styling consistent with app theme."
+        },
+        {
+          "path": "frontend/src/components/MemoryForm.tsx",
+          "operation": "create",
+          "description": "Create memory creation/editing form component with fields: photo URL (text input), voice note URL (text input), story text (textarea), subtitle (text input), year (number input), location (text input or select), scene type (select: beach/college/night), special memory toggle (checkbox), is secret toggle (checkbox). Use React Hook Form for validation. Submit via createMemory or updateMemory backend functions using React Query mutation. Show success/error feedback."
+        },
+        {
+          "path": "frontend/src/components/AdminMemoryList.tsx",
+          "operation": "create",
+          "description": "Create admin memory list component displaying all memories in a table or card grid. Include edit and delete action buttons for each memory. Clicking edit opens MemoryForm in edit mode with pre-filled data. Clicking delete shows confirmation modal then calls deleteMemory backend function. Use React Query for data fetching and cache invalidation after mutations."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire AdminPanel route with role-based protection using the authorization component. Add navigation link to Admin Panel visible only to admin users. Ensure admin routes are nested under /admin path prefix. Include protected route wrapper that checks isCallerAdmin() before rendering."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Create cinematic Ending Page with typewriter text sequence and group photo reveal",
+      "acceptanceCriteria": [
+        "Ending page is triggered when all memories are marked as viewed",
+        "Full black background with ambient piano audio autoplay",
+        "Three text lines appear sequentially with typewriter animation and delays",
+        "A group photo asset fades in slowly after text sequence completes",
+        "Page transition uses Framer Motion full-screen fade"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/EndingPage.tsx",
+          "operation": "create",
+          "description": "Create full-screen Ending Page component with matte black background. Auto-play ambient piano audio (provide URL prop or hardcoded asset path). Sequentially display three typewriter-animated text lines with 2-second delays: 'From strangers… to stories.' / 'From days… to memories.' / 'Our journey continues…'. After text sequence completes, fade in group photo image frontend/public/assets/generated/group-photo.dim_1200x675.png using Framer Motion. Use ending background image frontend/public/assets/generated/ending-bg.dim_1920x1080.png as backdrop."
+        },
+        {
+          "path": "frontend/src/hooks/useAllMemoriesViewed.ts",
+          "operation": "create",
+          "description": "Create custom hook that checks if all memories (including secret) have been viewed. Compare viewed memory IDs from backend getViewedMemoryIds() with total memory count. Return boolean indicating completion status. Trigger ending page navigation when all viewed."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Integrate useAllMemoriesViewed hook in main app component. When all memories are viewed, auto-navigate to EndingPage route with full-screen fade transition. Add route for /ending path. Ensure ending page is accessible only after all memories viewed (no direct navigation)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Apply global cinematic UI polish with golden accents, animations, and responsive layout",
+      "acceptanceCriteria": [
+        "Global background is #0A0A0A on all pages",
+        "All primary interactive elements use #FFD700 color with glow effect",
+        "Special memory cards render golden particle effects",
+        "All route changes use Framer Motion full-page fade transition",
+        "Click interactions show a ripple animation originating from click point",
+        "Parallax depth effect applied to memory cards on scroll",
+        "Layout is fully responsive with mobile-first breakpoints"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add global cinematic styles: body background #0A0A0A, default text color light gray/white. Define CSS custom properties for gold color (#FFD700) and glow (box-shadow: 0 0 20px rgba(255,215,0,0.6)). Add utility classes for golden borders, glows, and shadows. Include custom cursor styles. Apply responsive breakpoints using Tailwind or custom media queries."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with custom colors: matte-black: #0A0A0A, cinematic-gold: #FFD700. Add custom box-shadow utilities for golden glow effects. Configure custom font families for cursive/handwritten text. Set up responsive breakpoints for mobile/tablet/desktop views."
+        },
+        {
+          "path": "frontend/src/components/RippleEffect.tsx",
+          "operation": "create",
+          "description": "Create ripple effect component/hook that renders expanding circle animation on click events. Accept onClick event coordinates. Render absolute-positioned golden circle div with CSS scale and opacity animation. Auto-remove after animation completes. Apply globally via click handler wrapper or context."
+        },
+        {
+          "path": "frontend/src/components/ParticleEffect.tsx",
+          "operation": "create",
+          "description": "Create particle effect component for special memory cards. Use particle sprite image frontend/public/assets/generated/particle-sprite.dim_256x256.png. Render floating golden particles using CSS animations or canvas. Accept intensity prop. Apply conditionally to memory cards marked as special."
+        },
+        {
+          "path": "frontend/src/components/PageTransition.tsx",
+          "operation": "create",
+          "description": "Create page transition wrapper component using Framer Motion AnimatePresence and motion.div. Implement full-screen black fade-in/fade-out transitions for route changes. Accept children and apply exit/enter animations. Wrap all route components in App.tsx."
+        },
+        {
+          "path": "frontend/src/hooks/useParallax.ts",
+          "operation": "create",
+          "description": "Create custom hook for parallax scroll effect. Track scroll position and return transform values for parallax depth. Use requestAnimationFrame for smooth performance. Apply to memory cards for subtle depth movement on scroll."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap all route components with PageTransition for global fade transitions. Apply RippleEffect globally via click event listener or wrapper component. Ensure all pages use consistent matte-black background and golden accent styling. Test responsive layout on mobile and desktop viewports."
+        }
+      ]
+    }
+  ]
+}

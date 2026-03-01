@@ -1,0 +1,301 @@
+{
+  "kind": "build_request",
+  "title": "Cinematic Friendship & Travel Memory Experience Platform",
+  "projectName": "Memory Keepers",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a hardcoded authentication system for exactly 6 members stored in the Motoko backend. Each user has: id, name, email, hashed password, and role (admin or member). On successful login, the frontend displays an animated typewriter text: 'Welcome back, Memory Keeper.' using a cinematic fade + typewriter animation.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Login access only for 6 members",
+          "Role-based admin panel",
+          "After login show animated typewriter text: 'Welcome back, Memory Keeper.'"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Only 6 pre-seeded user accounts can log in",
+        "Users have a role field: 'admin' or 'member'",
+        "After successful login, a typewriter animation displays 'Welcome back, Memory Keeper.' on screen",
+        "Incorrect credentials show an error state",
+        "Session persists across page refreshes using local storage or React context"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Create a cinematic landing/intro page that fades in from a fully black screen, then displays a typewriter-animated introductory text: 'Some moments were never meant to be forgotten…' in gold (#FFD700). Enable a custom golden glowing cursor throughout the entire site (cursor glow: rgba(255,215,0,0.6)).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Screen fades from black",
+          "Typewriter cinematic intro text: 'Some moments were never meant to be forgotten…'",
+          "Golden glowing cursor enabled"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Page opens with a full black screen that fades in",
+        "Typewriter effect animates the intro text character by character",
+        "A custom gold-glowing cursor replaces the default cursor site-wide",
+        "After intro animation completes, user is transitioned to the main Memory Wheel view",
+        "Animation uses Framer Motion for page fade and a typewriter utility for text"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Build the Memory Wheel as the main feature: a circular wheel UI with memory photos placed along its border. The wheel rotates on scroll using animation (simulated GSAP-style via CSS transforms + React state). When a photo aligns at the center position: the page background transitions dynamically to match that memory's scene type, and the photo becomes clickable to unlock the memory.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Circular wheel containing memory photos on border",
+          "Scroll to rotate wheel using GSAP",
+          "When photo aligns at center: background changes dynamically, click unlocks memory"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Memory photos are arranged in a circular layout",
+        "Scrolling rotates the wheel, cycling through photos",
+        "The centered photo is visually highlighted (scale/glow)",
+        "Background gradient changes based on the centered memory's type",
+        "Clicking the centered photo triggers the Memory Unlock Animation"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement the Memory Unlock Animation sequence triggered on clicking a memory photo: (1) screen fades to black, (2) heartbeat pulse transition effect, (3) photo zooms in with a Three.js 3D depth/parallax effect rendered in a canvas, (4) voice narration audio plays (from stored URL), (5) subtitle text appears with a cinematic slide-up animation, (6) handwritten-style overlay text appears on the image using a cursive font with a drawing-in animation.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "screen fades to black",
+          "heartbeat transition",
+          "photo zooms in (3D depth using Three.js)",
+          "voice narration plays",
+          "subtitle appears with cinematic animation",
+          "handwritten overlay text appears on image"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking a memory triggers a full black screen fade",
+        "A heartbeat pulse animation plays before the photo appears",
+        "The photo is rendered in a Three.js canvas with 3D zoom/depth effect",
+        "Voice narration audio auto-plays from the memory's voice_note_url",
+        "Subtitle text animates in from below with cinematic timing",
+        "Handwritten overlay text appears on the photo with a draw-in cursive animation"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Apply dynamic background scenes based on memory location/type field: memories tagged as 'beach' or trip photos display a beach blur gradient background; memories tagged as 'college' display a campus-themed blur background; memories tagged as 'night' display a dark cinematic tone background. These backgrounds animate on transition.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Trip Photo → Beach blur gradient",
+          "College Photo → Campus blur",
+          "Night Photo → Dark cinematic tone"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each memory has a scene_type field used to select background",
+        "Beach type shows a warm ocean gradient with blur",
+        "College type shows a muted campus-toned background",
+        "Night type shows a deep dark cinematic black/indigo tone",
+        "Background transitions smoothly using Framer Motion when memory changes"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement a mode toggle allowing users to switch between Wheel Mode and Timeline Mode. In Timeline Mode, memories are displayed in a vertical scrollable timeline sorted by year, with scroll-triggered animations revealing each memory card year by year using Framer Motion intersection observer.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Switch between: Wheel Mode, Timeline Mode",
+          "Timeline scroll should animate memories year-wise"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A toggle button switches between Wheel Mode and Timeline Mode",
+        "Timeline Mode shows memories grouped and sorted by year",
+        "Each year section and memory card animates in on scroll",
+        "Transition between modes uses a smooth page/component transition",
+        "Both modes are accessible on mobile and desktop"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Build a Travel Map Mode showing a stylized SVG map of India with three clickable location markers: Vizag, Goa, and Bangalore. Clicking a location marker filters and displays memory cards related to that location in a side panel or modal with cinematic entrance animation.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "India map with clickable locations",
+          "Vizag, Goa, Bangalore",
+          "Clicking location shows related memories"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A stylized SVG India map is rendered with gold marker pins at Vizag, Goa, and Bangalore",
+        "Clicking a location pin filters memories by that location",
+        "Filtered memories appear in an animated panel/modal",
+        "Map markers glow gold on hover",
+        "Map view is accessible via main navigation"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement Secret Memory Unlock logic: track how many memories have been viewed and how many times the wheel has been fully rotated (5 rotations). When all regular memories are viewed OR the wheel is rotated 5 times, unlock and reveal a hidden special memory with a distinct 'secret revealed' cinematic animation (e.g., golden particle burst + special typewriter message).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Unlock hidden memory when: all memories viewed OR wheel rotated 5 times"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend tracks a 'secret' flag on one memory record",
+        "Frontend tracks viewed memory IDs in state/local storage",
+        "Frontend counts wheel rotation cycles",
+        "Secret memory is unlocked when condition is met and stored in user session",
+        "A cinematic reveal animation (particle burst + typewriter) triggers on unlock"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Build an Admin Panel accessible only to users with the 'admin' role. The panel allows: uploading a photo (stored as URL), uploading a voice note (stored as URL), adding story text, adding subtitle text, setting year, setting location, marking a memory as special. All fields map to the Memories data structure in the Motoko backend.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Admin can: Upload photo, Upload voice note, Add story text, Add subtitle, Set year, Set location, Mark as special memory"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin panel route is protected and only accessible to admin-role users",
+        "Form includes fields for all memory attributes",
+        "Submitting the form calls a backend create/update function",
+        "Photo and voice note URLs are stored as text fields (no binary upload required)",
+        "Admin can mark a memory as 'special' via a toggle",
+        "Existing memories are listed with edit/delete options"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Create a cinematic Ending Page that triggers after all memories have been viewed. It displays: a full black screen, ambient piano audio plays (from a stored asset URL), the following lines appear one by one with cinematic typewriter animation: 'From strangers… to stories.' / 'From days… to memories.' / 'Our journey continues…', then a group photo asset fades in slowly from black.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "After viewing all memories: Black screen + piano sound",
+          "'From strangers… to stories.'",
+          "'From days… to memories.'",
+          "'Our journey continues…'",
+          "Then group photo fades in slowly"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Ending page is triggered when all memories are marked as viewed",
+        "Full black background with ambient piano audio autoplay",
+        "Three text lines appear sequentially with typewriter animation and delays",
+        "A group photo asset fades in slowly after text sequence completes",
+        "Page transition uses Framer Motion full-screen fade"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Implement the Memories data model in the Motoko backend as a stable array/map of Memory records, each containing: memory_id, photo_url, voice_note_url, story_text, subtitle, location, year, special_memory (Bool), scene_type, and is_secret (Bool). Expose CRUD query/update functions: getMemories, getMemoryById, createMemory (admin), updateMemory (admin), deleteMemory (admin), and markMemoryViewed.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Memories: memory_id, photo_url, voice_note_url, story_text, subtitle, location, year, special_memory"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Memory type defined with all required fields in Motoko",
+        "getMemories returns all non-secret memories for authenticated users",
+        "createMemory is restricted to admin callers",
+        "updateMemory and deleteMemory are restricted to admin callers",
+        "markMemoryViewed tracks viewed state per user session",
+        "Secret memory only returned via a dedicated unlockSecret function when conditions are met"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Apply global cinematic UI polish: matte black (#0A0A0A) background throughout, all accent text/borders/glows use gold (#FFD700) with glow rgba(255,215,0,0.6). Include: parallax scroll effect on memory cards, particle effects (golden floating particles) exclusive to special memories, ripple animation on all click interactions, page fade transitions between all routes, and consistent golden border/shadow on all cards and interactive elements. Ensure full responsive layout for mobile and desktop.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Use golden glow effects on cursor, text, and borders",
+          "Include parallax scroll, particle effect (only for special memories), typewriter effect, handwriting effect, ripple click animation and page fade transitions",
+          "Make website responsive for mobile and desktop"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Global background is #0A0A0A on all pages",
+        "All primary interactive elements use #FFD700 color with glow effect",
+        "Special memory cards render golden particle effects",
+        "All route changes use Framer Motion full-page fade transition",
+        "Click interactions show a ripple animation originating from click point",
+        "Parallax depth effect applied to memory cards on scroll",
+        "Layout is fully responsive with mobile-first breakpoints"
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must be implemented in Motoko as a single actor (no Python Flask, no PostgreSQL — platform constraint)",
+    "Do not use external databases; all state must be persisted in Motoko stable variables",
+    "No real binary file upload — photo_url and voice_note_url are stored as text URLs",
+    "Authentication must not use external providers; use custom credential validation in Motoko",
+    "Immutable frontend paths (hooks, main.tsx, ui components) must not be modified"
+  ],
+  "nonGoals": [
+    "Real-time WebSocket features or live collaboration",
+    "Email or SMS notification system",
+    "External cloud storage integration (AWS S3, etc.)",
+    "Mobile app (React Native) — web responsive only",
+    "Third-party payment or social login integration",
+    "GPS or real geolocation services — map is decorative SVG only"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Matte black cinematic hero background with subtle golden light rays and film grain texture (hero-bg.dim_1920x1080.png)",
+      "Golden glowing circular memory wheel frame with ornate border detail on transparent background (wheel-frame.dim_800x800.png)",
+      "Stylized minimal SVG-style India map silhouette with gold outline on dark background, marker dots at Vizag, Goa, and Bangalore (india-map.dim_600x800.png)",
+      "Cinematic ending screen background — deep black with soft golden bokeh light particles (ending-bg.dim_1920x1080.png)",
+      "Golden particle/sparkle sprite sheet for special memory effect (particle-sprite.dim_256x256.png)",
+      "Placeholder group photo silhouette — soft sepia-toned cinematic style, group of friends, blurred warm tones (group-photo.dim_1200x675.png)"
+    ],
+    "edits": []
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-03-01T05:46:24.264Z",
+  "summary": "The diff implements a substantial portion of the requested cinematic friendship & travel memory experience platform. Most frontend components and backend structures are present, but several specific requirements have gaps or are partially implemented. Key issues include: authentication using Internet Identity instead of the required custom credential validation with 6 hardcoded users, the 'Welcome back, Memory Keeper.' typewriter on login success appears missing, Framer Motion is not visibly used (CSS transitions used instead), Three.js canvas for 3D photo effect is referenced but not shown in full, and the WelcomeScreen component is imported but not detailed in the diff.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Hardcoded authentication system for exactly 6 members in Motoko backend with id, name, email, hashed password, and role. Custom credential validation (no external providers).",
+      "reason": "The LoginPage uses useInternetIdentity (Internet Identity / external provider) rather than a custom credential validation system. The Motoko backend uses AccessControl/MixinAuthorization mixins rather than 6 hardcoded users with email/hashed password. No evidence of 6 pre-seeded user accounts with credentials in the backend.",
+      "evidence": [
+        "frontend/src/components/LoginPage.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "After successful login, the frontend displays an animated typewriter text: 'Welcome back, Memory Keeper.' using a cinematic fade + typewriter animation.",
+      "reason": "The WelcomeScreen component is imported in App.tsx but its content is not shown in the diff. The LoginPage itself shows no typewriter animation for 'Welcome back, Memory Keeper.' The phase transitions to 'welcome' but what WelcomeScreen renders is unknown from the provided diff.",
+      "evidence": [
+        "frontend/src/components/LoginPage.tsx",
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Animation uses Framer Motion for page fade and a typewriter utility for text.",
+      "reason": "IntroPage uses CSS opacity transitions instead of Framer Motion. No import of framer-motion is visible in any of the shown component files. The requirement explicitly calls for Framer Motion.",
+      "evidence": [
+        "frontend/src/components/IntroPage.tsx",
+        "frontend/src/components/PageTransition.tsx"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Photo zooms in with a Three.js 3D depth/parallax effect rendered in a canvas.",
+      "reason": "ThreePhotoCanvas is referenced in MemoryUnlockAnimation.tsx but its implementation file is not included in the diff summary, so it cannot be verified as actually implementing Three.js 3D depth/parallax.",
+      "evidence": [
+        "frontend/src/components/MemoryUnlockAnimation.tsx"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Background transitions smoothly using Framer Motion when memory changes.",
+      "reason": "DynamicBackground uses CSS opacity transitions, not Framer Motion as specified.",
+      "evidence": [
+        "frontend/src/components/DynamicBackground.tsx"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "requirement": "Backend tracks a secret flag on one memory record; secret memory only returned via a dedicated unlockSecret function when conditions are met.",
+      "reason": "The Motoko backend has is_secret field on Memory and getAllMemories filters secrets for authenticated users, but no dedicated unlockSecret function is visible in the truncated backend code.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "requirement": "Page transition uses Framer Motion full-screen fade.",
+      "reason": "EndingPage uses CSS opacity transitions rather than Framer Motion for the full-screen fade as specified.",
+      "evidence": [
+        "frontend/src/components/EndingPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "requirement": "markMemoryViewed tracks viewed state per user session; secret memory only returned via a dedicated unlockSecret function when conditions are met.",
+      "reason": "The backend code is truncated and does not show markMemoryViewed or unlockSecret functions being implemented.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "All route changes use Framer Motion full-page fade transition.",
+      "reason": "PageTransition component uses plain CSS opacity transition, not Framer Motion as explicitly required.",
+      "evidence": [
+        "frontend/src/components/PageTransition.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity authentication (useInternetIdentity hook) used instead of custom credential validation",
+      "reason": "The build request explicitly prohibits external authentication providers and requires custom credential validation in Motoko. The implementation uses Internet Identity which is an external provider.",
+      "evidence": [
+        "frontend/src/components/LoginPage.tsx",
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "description": "ProfileSetupModal for collecting user name after login",
+      "reason": "The build request does not mention a profile setup modal or collecting a name post-login. Users are pre-seeded with all their information.",
+      "evidence": [
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "description": "UserProfile entity and saveCallerUserProfile/getCallerUserProfile functions in the backend",
+      "reason": "The build request does not specify a UserProfile type separate from the hardcoded user accounts, nor a profile save/get flow.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AdminMemoryList.tsx",
+    "frontend/src/components/AdminPanel.tsx",
+    "frontend/src/components/DynamicBackground.tsx",
+    "frontend/src/components/EndingPage.tsx",
+    "frontend/src/components/GoldenCursor.tsx",
+    "frontend/src/components/IntroPage.tsx",
+    "frontend/src/components/LocationMarker.tsx",
+    "frontend/src/components/LoginPage.tsx",
+    "frontend/src/components/MemoryCard.tsx",
+    "frontend/src/components/MemoryForm.tsx",
+    "frontend/src/components/MemoryUnlockAnimation.tsx",
+    "frontend/src/components/MemoryWheel.tsx",
+    "frontend/src/components/ModeToggle.tsx",
+    "frontend/src/components/PageTransition.tsx",
+    "frontend/src/components/ParticleEffect.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/components/RippleEffect.tsx",
+    "frontend/src/components/SecretRevealAnimation.tsx",
+    "frontend/src/components/ThreePhotoCanvas.tsx",
+    "frontend/src/components/TimelineMode.tsx",
+    "frontend/src/components/TravelMapMode.tsx",
+    "frontend/src/components/WelcomeScreen.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useTypewriter.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/useIntersectionObserver.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

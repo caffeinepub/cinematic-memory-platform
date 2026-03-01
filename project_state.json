@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Full-stack cinematic storytelling memory website — Friendship + Travel Memory Experience Platform. React.js frontend, Python Flask backend, PostgreSQL database. Matte Black (#0A0A0A) + Shiny Gold (#FFD700) theme. Features: authentication for 6 members with role-based admin, cinematic landing animation, interactive Memory Wheel (GSAP scroll rotation), Memory Unlock Animation (Three.js 3D, voice narration, subtitles), dynamic backgrounds by photo type, Timeline Mode toggle, India Travel Map with clickable locations, secret memory unlock logic, admin panel for content management, and a cinematic ending page.",
+  "architectural_notes": [
+    "Stack: React.js (frontend), Python Flask (backend), PostgreSQL (database)",
+    "Animations: GSAP + Framer Motion + Three.js",
+    "Theme: Matte Black #0A0A0A + Shiny Gold #FFD700, glow rgba(255,215,0,0.6)",
+    "DB Tables: Users (id, name, email, password, role), Memories (memory_id, photo_url, voice_note_url, story_text, subtitle, location, year, special_memory)",
+    "Global UX: parallax scroll, particle effects (special memories only), typewriter, handwriting effect, ripple click, page fade transitions, responsive mobile+desktop"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Matte black cinematic hero background with subtle golden light rays and film grain texture (hero-bg.dim_1920x1080.png)\n- Golden glowing circular memory wheel frame with ornate border detail on transparent background (wheel-frame.dim_800x800.png)\n- Stylized minimal SVG-style India map silhouette with gold outline on dark background, marker dots at Vizag, Goa, and Bangalore (india-map.dim_600x800.png)\n- Cinematic ending screen background — deep black with soft golden bokeh light particles (ending-bg.dim_1920x1080.png)\n- Golden particle/sparkle sprite sheet for special memory effect (particle-sprite.dim_256x256.png)\n- Placeholder group photo silhouette — soft sepia-toned cinematic style, group of friends, blurred warm tones (group-photo.dim_1200x675.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-a-hardcoded-authentication-system-for-exactly-6-members-stored-in-the-motoko-backend-each-user-has-id-name-email-hashed-password-and-role-admin-or-member-on-successful-login-the-frontend-displays-an-animated-typewriter-text-welcome-back-memory-keeper-using-a-cinematic-fade-typewriter-animation",
+      "title": "Implement a hardcoded authentication system for exactly 6 members stored in the Motoko backend. Each user has: id, name, email, hashed password, and role (admin or member). On successful login, the frontend displays an animated typewriter text: 'Welcome back, Memory Keeper.' using a cinematic fade + typewriter animation.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-cinematic-landing-intro-page-that-fades-in-from-a-fully-black-screen-then-displays-a-typewriter-animated-introductory-text-some-moments-were-never-meant-to-be-forgotten-in-gold-ffd700-enable-a-custom-golden-glowing-cursor-throughout-the-entire-site-cursor-glow-rgba-255-215-0-0-6",
+      "title": "Create a cinematic landing/intro page that fades in from a fully black screen, then displays a typewriter-animated introductory text: 'Some moments were never meant to be forgotten…' in gold (#FFD700). Enable a custom golden glowing cursor throughout the entire site (cursor glow: rgba(255,215,0,0.6)).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-memory-wheel-as-the-main-feature-a-circular-wheel-ui-with-memory-photos-placed-along-its-border-the-wheel-rotates-on-scroll-using-animation-simulated-gsap-style-via-css-transforms-react-state-when-a-photo-aligns-at-the-center-position-the-page-background-transitions-dynamically-to-match-that-memory-s-scene-type-and-the-photo-becomes-clickable-to-unlock-the-memory",
+      "title": "Build the Memory Wheel as the main feature: a circular wheel UI with memory photos placed along its border. The wheel rotates on scroll using animation (simulated GSAP-style via CSS transforms + React state). When a photo aligns at the center position: the page background transitions dynamically to match that memory's scene type, and the photo becomes clickable to unlock the memory.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-memory-unlock-animation-sequence-triggered-on-clicking-a-memory-photo-1-screen-fades-to-black-2-heartbeat-pulse-transition-effect-3-photo-zooms-in-with-a-three-js-3d-depth-parallax-effect-rendered-in-a-canvas-4-voice-narration-audio-plays-from-stored-url-5-subtitle-text-appears-with-a-cinematic-slide-up-animation-6-handwritten-style-overlay-text-appears-on-the-image-using-a-cursive-font-with-a-drawing-in-animation",
+      "title": "Implement the Memory Unlock Animation sequence triggered on clicking a memory photo: (1) screen fades to black, (2) heartbeat pulse transition effect, (3) photo zooms in with a Three.js 3D depth/parallax effect rendered in a canvas, (4) voice narration audio plays (from stored URL), (5) subtitle text appears with a cinematic slide-up animation, (6) handwritten-style overlay text appears on the image using a cursive font with a drawing-in animation.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-dynamic-background-scenes-based-on-memory-location-type-field-memories-tagged-as-beach-or-trip-photos-display-a-beach-blur-gradient-background-memories-tagged-as-college-display-a-campus-themed-blur-background-memories-tagged-as-night-display-a-dark-cinematic-tone-background-these-backgrounds-animate-on-transition",
+      "title": "Apply dynamic background scenes based on memory location/type field: memories tagged as 'beach' or trip photos display a beach blur gradient background; memories tagged as 'college' display a campus-themed blur background; memories tagged as 'night' display a dark cinematic tone background. These backgrounds animate on transition.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-mode-toggle-allowing-users-to-switch-between-wheel-mode-and-timeline-mode-in-timeline-mode-memories-are-displayed-in-a-vertical-scrollable-timeline-sorted-by-year-with-scroll-triggered-animations-revealing-each-memory-card-year-by-year-using-framer-motion-intersection-observer",
+      "title": "Implement a mode toggle allowing users to switch between Wheel Mode and Timeline Mode. In Timeline Mode, memories are displayed in a vertical scrollable timeline sorted by year, with scroll-triggered animations revealing each memory card year by year using Framer Motion intersection observer.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-travel-map-mode-showing-a-stylized-svg-map-of-india-with-three-clickable-location-markers-vizag-goa-and-bangalore-clicking-a-location-marker-filters-and-displays-memory-cards-related-to-that-location-in-a-side-panel-or-modal-with-cinematic-entrance-animation",
+      "title": "Build a Travel Map Mode showing a stylized SVG map of India with three clickable location markers: Vizag, Goa, and Bangalore. Clicking a location marker filters and displays memory cards related to that location in a side panel or modal with cinematic entrance animation.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-secret-memory-unlock-logic-track-how-many-memories-have-been-viewed-and-how-many-times-the-wheel-has-been-fully-rotated-5-rotations-when-all-regular-memories-are-viewed-or-the-wheel-is-rotated-5-times-unlock-and-reveal-a-hidden-special-memory-with-a-distinct-secret-revealed-cinematic-animation-e-g-golden-particle-burst-special-typewriter-message",
+      "title": "Implement Secret Memory Unlock logic: track how many memories have been viewed and how many times the wheel has been fully rotated (5 rotations). When all regular memories are viewed OR the wheel is rotated 5 times, unlock and reveal a hidden special memory with a distinct 'secret revealed' cinematic animation (e.g., golden particle burst + special typewriter message).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-admin-panel-accessible-only-to-users-with-the-admin-role-the-panel-allows-uploading-a-photo-stored-as-url-uploading-a-voice-note-stored-as-url-adding-story-text-adding-subtitle-text-setting-year-setting-location-marking-a-memory-as-special-all-fields-map-to-the-memories-data-structure-in-the-motoko-backend",
+      "title": "Build an Admin Panel accessible only to users with the 'admin' role. The panel allows: uploading a photo (stored as URL), uploading a voice note (stored as URL), adding story text, adding subtitle text, setting year, setting location, marking a memory as special. All fields map to the Memories data structure in the Motoko backend.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-cinematic-ending-page-that-triggers-after-all-memories-have-been-viewed-it-displays-a-full-black-screen-ambient-piano-audio-plays-from-a-stored-asset-url-the-following-lines-appear-one-by-one-with-cinematic-typewriter-animation-from-strangers-to-stories-from-days-to-memories-our-journey-continues-then-a-group-photo-asset-fades-in-slowly-from-black",
+      "title": "Create a cinematic Ending Page that triggers after all memories have been viewed. It displays: a full black screen, ambient piano audio plays (from a stored asset URL), the following lines appear one by one with cinematic typewriter animation: 'From strangers… to stories.' / 'From days… to memories.' / 'Our journey continues…', then a group photo asset fades in slowly from black.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-global-cinematic-ui-polish-matte-black-0a0a0a-background-throughout-all-accent-text-borders-glows-use-gold-ffd700-with-glow-rgba-255-215-0-0-6-include-parallax-scroll-effect-on-memory-cards-particle-effects-golden-floating-particles-exclusive-to-special-memories-ripple-animation-on-all-click-interactions-page-fade-transitions-between-all-routes-and-consistent-golden-border-shadow-on-all-cards-and-interactive-elements-ensure-full-responsive-layout-for-mobile-and-desktop",
+      "title": "Apply global cinematic UI polish: matte black (#0A0A0A) background throughout, all accent text/borders/glows use gold (#FFD700) with glow rgba(255,215,0,0.6). Include: parallax scroll effect on memory cards, particle effects (golden floating particles) exclusive to special memories, ripple animation on all click interactions, page fade transitions between all routes, and consistent golden border/shadow on all cards and interactive elements. Ensure full responsive layout for mobile and desktop.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Authentication system: login for 6 members, role-based admin, animated typewriter welcome text",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Cinematic landing animation: black fade-in, typewriter intro text, golden glowing cursor",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Memory Wheel: circular GSAP scroll-rotating photo wheel, dynamic background on center-align, click to unlock",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Memory Unlock Animation: black fade, heartbeat, Three.js 3D zoom, voice narration, cinematic subtitles, handwritten overlay",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Dynamic background scenes based on photo type (beach, campus, night)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Timeline Mode toggle: switch between Wheel Mode and year-wise animated Timeline Mode",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "India Travel Map with clickable locations (Vizag, Goa, Bangalore) showing related memories",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Secret Memory Unlock: reveal hidden memory after all viewed or wheel rotated 5 times",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Admin panel: upload photo/voice note, add story/subtitle/year/location, mark special memory",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Cinematic ending page: black screen, piano sound, animated text, group photo fade-in",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Implement the Memories data model in the Motoko backend as a stable array/map of Memory records, each containing: memory_id, photo_url, voice_note_url, story_text, subtitle, location, year, special_memory (Bool), scene_type, and is_secret (Bool). Expose CRUD query/update functions: getMemories, getMemoryById, createMemory (admin), updateMemory (admin), deleteMemory (admin), and markMemoryViewed.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Cinematic Memory Platform",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
